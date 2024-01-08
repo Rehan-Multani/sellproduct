@@ -14,7 +14,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
-app.use("/api/addusers", require("./route"));
+app.use("/api/adduser", require("./route"));
 
 app.listen(PORT, () => {
   console.log(
