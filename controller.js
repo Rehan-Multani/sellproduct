@@ -10,12 +10,12 @@ const getpaginate = async (req, res) => {
 };
 
 
-const Getdata = async (req, rsep) => {
+const Getdata = async (req, res) => {
     try {
         const result = await db.find({ _id: req.params.id })
-        rsep.send(result)
+        res.status(200).send(result)
     } catch (error) {
-        resp.status(404).json(error.message)
+        res.status(404).json(error.message)
 
     }
 }
