@@ -15,6 +15,9 @@ app.use(bodyParser.json());
 
 
 app.use("/api/adduser", require("./route"));
+app.use("/api/salesorder", require("./SalesOrderRoute/SalesOrderRoute"));
+app.use("/api/purchaseorder", require("./PurchaseOrderRoute"));
+
 
 app.listen(PORT, () => {
   console.log(
