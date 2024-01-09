@@ -49,7 +49,7 @@ const data = Schema(
             //     warehouse: {
             //         type: String,
             //     },
-            //     discount: {
+            //     discount: { 
             //         type: String,
             //     },
             //     tax: {
