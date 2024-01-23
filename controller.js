@@ -1,4 +1,4 @@
-const db = require('./model');
+const db = require('./AddsellProduct/Model');
 
 const getpaginate = async (req, res) => {
     try {
@@ -22,25 +22,25 @@ const Getdata = async (req, res) => {
 
 const Postdata = async (req, res) => {
     try {
-      const existingUser = await db.findOne({ email: req.body.email });
-  
-      if (existingUser) {
-        return res.status(409).json({ error: "Email already exists" });
-      }
-  
-      if (req.body.password !== req.body.confirmpassword) {
-        return res.status(400).json({ error: "Passwords do not match" });
-      }
-  
-      // Additional validation steps could go here...
-  
-      const newUser = await db.create(req.body);
-      return res.status(201).json(newUser); // 201 for successful creation
+        const existingUser = await db.findOne({ email: req.body.email });
+
+        if (existingUser) {
+            return res.status(409).json({ error: "Email already exists" });
+        }
+
+        if (req.body.password !== req.body.confirmpassword) {
+            return res.status(400).json({ error: "Passwords do not match" });
+        }
+
+        // Additional validation steps could go here...
+
+        const newUser = await db.create(req.body);
+        return res.status(201).json(newUser); // 201 for successful creation
     } catch (error) {
-      return res.status(500).json({ error: "Error creating user", message: error.message });
+        return res.status(500).json({ error: "Error creating user", message: error.message });
     }
-  };
-  
+};
+
 const Putdata = async (req, res) => {
     try {
         let result = await db.updateMany(
