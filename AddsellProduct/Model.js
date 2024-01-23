@@ -99,6 +99,28 @@ data.pre("save", async function (next) {
 
     next();
 });
+data.pre("findOneAndUpdate", async function (next) {
+    const conditions = this._conditions;
+    const update = this._update;
+
+    // Check if password or confirmPassword fields are present and modified
+    if ((update.$set && update.$set.password && conditions.password !== update.$set.password) ||
+        (update.$set && update.$set.confirmPassword && conditions.confirmPassword !== update.$set.confirmPassword)) {
+
+        const salt = await bcrypt.genSalt(10);
+
+        if (update.$set.password) {
+            update.$set.password = await bcrypt.hash(update.$set.password, salt);
+        }
+
+        if (update.$set.confirmPassword) {
+            update.$set.confirmPassword = await bcrypt.hash(update.$set.confirmPassword, salt);
+        }
+    }
+    next();
+});
+
+
 
 module.exports = mongoose.model("sellproduct", data);
 

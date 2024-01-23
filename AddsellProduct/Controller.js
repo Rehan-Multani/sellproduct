@@ -50,7 +50,7 @@ const insertdata = asyncHandler(async (req, res) => {
 const updatedata = asyncHandler(async (req, res) => {
     try {
         const img = req.uploadedImageUrl;
-        const result = await db.updateOne(
+        const result = await db.findOneAndUpdate(
             { _id: req.params.id },
             {
                 $set: {
