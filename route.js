@@ -1,6 +1,6 @@
 const express = require("express");
 const { getpaginate, Getdata, Postdata, Putdata, DeleteData } =
-    require('./AddsellProduct/Controller')
+    require('./controller')
 const router = express.Router();
 
 router.get("/", getpaginate)

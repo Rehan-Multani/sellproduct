@@ -13,7 +13,6 @@ dbConnect();
 app.use(cors());
 app.use(bodyParser.json());
 
-
 app.use("/api/adduser", require("./route"));
 app.use("/api/salesorder", require("./SalesOrderRoute/SalesOrderRoute"));
 app.use("/api/purchaseorder", require("./PurchaseOrderRoute"));
@@ -23,6 +22,6 @@ app.use("/api/sellproduct", require("./AddsellProduct/Route"));
 
 app.listen(PORT, () => {
   console.log(
-    `Hritik bhai no Tention Your Server is running  at PORT ${PORT} 🦍🦍🦍`
+    `Your Server is running  at PORT ${PORT}`
   );
 });

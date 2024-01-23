@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const data = mongoose.Schema({
     firstName: {
@@ -56,11 +57,6 @@ const data = mongoose.Schema({
         required: true,
 
     },
-    confirmPassword: {
-        type: String,
-        required: true,
-
-    },
     mobile: {
         type: String,
         required: true,
@@ -72,11 +68,6 @@ const data = mongoose.Schema({
 
     },
     comapanyName: {
-        type: String,
-        required: true,
-
-    },
-    currencyOnDeal: {
         type: String,
         required: true,
 
@@ -95,5 +86,20 @@ const data = mongoose.Schema({
     {
         timestamps: true,
     })
+
+data.pre("save", async function (next) {
+    const user = this;
+
+    // Hash the password and confirmPassword if they are present and modified
+    if ((user.isModified("password") || user.isModified("confirmPassword")) && user.password && user.confirmPassword) {
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(user.password, salt);
+        user.confirmPassword = await bcrypt.hash(user.confirmPassword, salt);
+    }
+
+    next();
+});
+
 module.exports = mongoose.model("sellproduct", data);
+
 

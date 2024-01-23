@@ -2,9 +2,9 @@ const express = require("express");
 const multer = require('multer')
 const storage = multer.memoryStorage()
 const upload = multer({ storage: storage })
-const { getpaginate, insertdata, updatedata, deletedata, getdata } =
+const { getpaginate, getdata, insertdata, updatedata, deletedata } =
     require('./Controller')
-const uploadedImageUrl = require('../Middewares/singleImgUpload')
+const uploadedImageUrl = require('../singleImgUpload')
 const router = express.Router();
 
 router.get("/", getpaginate)
